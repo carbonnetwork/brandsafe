@@ -1,9 +1,9 @@
 pragma solidity ^0.4.23;
 
-
-import "zeppelin-solidity/contracts/Ownable.sol";
 import "carbon-ico/contracts/SafeMathLib.sol";
 import "carbon-ico/contracts/CarbonToken.sol";
+import "carbon-ico/contracts/Ownable.sol";
+
 import "./lib/MapLib.sol";
 
 /**
@@ -78,7 +78,7 @@ contract Datastore is Owable {
 	}
 
 
-	function getTimeoutURL() internal returns(uint id, bytes url) {
+	function getTimeoutURL() internal returns(uint _id, bytes _url) {
 		uint length = locklist.length;
 
 		for(uint i = 0; i < length; i++){
@@ -97,20 +97,20 @@ contract Datastore is Owable {
 	/*
 	 * 获取url中的一个，首先从超时未处理的部分获取;
 	 */
-	function getURL() public returns(uint id, bytes url) {
+	function getURL() public returns(uint _id, bytes _url) {
 		if (lockMap.contains()){
 			return (0, "");
 		}
 
 		uint index = lockMap.iterateStart(-1);	
 		while (index > -1){
-			(key, id, timestamp) = lockMap.iterateGet(index);
-			if ( id > 0 && now > timestamp + fiveMin){
-				URL u = urls[id];
+			(key, _id, timestamp) = lockMap.iterateGet(index);
+			if ( _id > 0 && now > timestamp + fiveMin){
+				URL u = urls[_id];
 
 				if (balances[u.sender] >= u.price){
 					lockmap.remove(key);
-					return (id, u.url);
+					return (_id, u.url);
 				}				
 			}
 
@@ -124,17 +124,17 @@ contract Datastore is Owable {
 	/*
 	 * 根据状态获取url和其对应的额id，目前只获取当前状态的第一条
 	 */
-	function getURLByStatus(uint8 _status) public returns(uint id, bytes url) {
+	function getURLByStatus(uint8 _status) public returns(uint uid, bytes url) {
 		require (status < 3);
 
 		uint[] ns = statusIndex[0];
 
 		uint length = ns.length;
 		for( uint i = 0; i < length; i++){
-			uint id = ns[i];
-			URL u = urls[id];
+			uint _id = ns[i];
+			URL u = urls[_id];
 			if (balances[u.sender] >= u.price){
-				return (id, u.url);
+				return (_id, u.url);
 			}
 		}
 
@@ -195,12 +195,12 @@ contract Datastore is Owable {
 	 	return true;
 	}
 
-	function recharge (uint amount) public {
-		require (amount > 0);
-		require (carbon.balanceOf(msg.sender) > amount);
+	function recharge (uint _amount) public {
+		require (_amount > 0);
+		require (carbon.balanceOf(msg.sender) > _amount);
 		
-		carbon.transferFrom(address(this), amount);
-		balances[msg.sender] = balances[msg.sender].add(amount);
+		carbon.transferFrom(address(this), _amount);
+		balances[msg.sender] = balances[msg.sender].add(_amount);
 	}
 	
 
@@ -214,21 +214,21 @@ contract Datastore is Owable {
 	    balances[msg.sender] = balances[msg.sender].sub(payment);
 	}
 
-	function asyncSend(address from, address to, uint amount) internal {
+	function asyncSend(address _from, address _to, uint _amount) internal {
 
 		require (msg.value > 0);
 
-		balances[from] = balances[from].sub(amount);
-	    balances[to] = balances[to].add(amount);
+		balances[from] = balances[_from].sub(_amount);
+	    balances[to] = balances[_to].add(_amount);
 	}
 
 	/*
 	 * 获取元素在数组中的位置，找不到为-1
 	 */
-	function indexOf (uint[] collection, uint _elem) public returns(uint index) {
-		uint length = collection.length;
+	function indexOf (uint[] _collection, uint _elem) public returns(uint _index) {
+		uint length = _collection.length;
 		for (uint i = 0; i < length; i++) {
-			if(collection[i] == _elem){
+			if(_collection[i] == _elem){
 				return i;
 			}
 		}
@@ -238,26 +238,26 @@ contract Datastore is Owable {
 	/*
 	 * 添加id到集合中，首先利用空着的位置（值为0，id > 0）
 	 */
-	function addIndex(uint[] collection, uint _id) internal returns(bool res) {
-		uint length = collection.length;
+	function addIndex(uint[] _collection, uint _id) internal returns(bool _res) {
+		uint length = _collection.length;
 		for (uint i = 0; i < length; i++) {
-			if(collection[i] == 0){
-				collection[i] = _id;
+			if(_collection[i] == 0){
+				_collection[i] = _id;
 				return true;
 			}
 		}
 
-		collection.push(_id);
+		_collection.push(_id);
 		return true;
 	}
 	
 	/*
 	 * 移除id, 将id对应的位置值设置为0
 	 */
-	function removeIndex(uint[] collection, uint _id) internal returns(bool res) {
-		uint index = indexOf(collection, _id);
+	function removeIndex(uint[] _collection, uint _id) internal returns(bool _res) {
+		uint index = indexOf(_collection, _id);
 		if(index != -1 ){
-			collection[index] = 0;
+			_collection[index] = 0;
 		}
 		return true;
 	}

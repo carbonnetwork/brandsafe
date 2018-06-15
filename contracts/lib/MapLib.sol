@@ -27,7 +27,7 @@ library MapLib {
 		uint timestamp;
 	}
 	
-	function put(LockMap storage self, uint _id)m public returns(bool res) {
+	function put(LockMap storage self, uint _id) public returns(bool res) {
 		
 		self.data[msg.sender].value = LockTime(_id,now);
 		uint keyIndex = self.data[msg.sender].keyIndex;
