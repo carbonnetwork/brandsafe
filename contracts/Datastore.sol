@@ -9,7 +9,7 @@ import "./lib/MapLib.sol";
 /**
  * The Datastore contract does this and that...
  */
-contract Datastore is Owable {
+contract Datastore is Ownable {
 	using MapLib for MapLib.LockMap;
 	MapLib.LockMap lockMap;
 
@@ -59,12 +59,15 @@ contract Datastore is Owable {
 	function addURL(bytes _url, uint _price) public returns(bool res) {
 		require (_url.length > 0 && _price > 0);
 		
-		bytes url = URL({
+		URL memory url = URL({
 			sender : msg.sender,
 			url : _url,
 			price : _price,
 			status : 0,
-			timestamp : now
+			timestamp : now,
+			analysor : address(0),
+			cates : '',
+			gas : 0
 		});
 
 		urls[id++] = url;
@@ -78,22 +81,6 @@ contract Datastore is Owable {
 	}
 
 
-	function getTimeoutURL() internal returns(uint _id, bytes _url) {
-		uint length = locklist.length;
-
-		for(uint i = 0; i < length; i++){
-			LockTime lt = locklist[i];
-			if (now > lt.timestamp + fiveMin && lt.analysor != msg.sender){
-				lt.analysor = msg.sender;
-				lt.timestamp = now;
-				return (lt.id, urls[lt.id].url);
-			}
-		}
-
-		return (0, "");
-	}
-	
-
 	/*
 	 * 获取url中的一个，首先从超时未处理的部分获取;
 	 */
@@ -102,14 +89,16 @@ contract Datastore is Owable {
 			return (0, "");
 		}
 
-		uint index = lockMap.iterateStart(-1);	
-		while (index > -1){
+		uint index = lockMap.iterateStart();
+		address key;
+		uint timestamp;	
+		while (index >= 0){
 			(key, _id, timestamp) = lockMap.iterateGet(index);
 			if ( _id > 0 && now > timestamp + fiveMin){
-				URL u = urls[_id];
+				URL storage u = urls[_id];
 
 				if (balances[u.sender] >= u.price){
-					lockmap.remove(key);
+					lockMap.remove(key);
 					return (_id, u.url);
 				}				
 			}
@@ -124,15 +113,15 @@ contract Datastore is Owable {
 	/*
 	 * 根据状态获取url和其对应的额id，目前只获取当前状态的第一条
 	 */
-	function getURLByStatus(uint8 _status) public returns(uint uid, bytes url) {
-		require (status < 3);
+	function getURLByStatus(uint8 _status) public view returns(uint uid, bytes url) {
+		require (_status < 3);
 
-		uint[] ns = statusIndex[0];
+		uint[] storage ns = statusIndex[0];
 
 		uint length = ns.length;
 		for( uint i = 0; i < length; i++){
 			uint _id = ns[i];
-			URL u = urls[_id];
+			URL storage u = urls[_id];
 			if (balances[u.sender] >= u.price){
 				return (_id, u.url);
 			}
@@ -144,15 +133,15 @@ contract Datastore is Owable {
 	/*
 	 * 将url的状态从未分析，更新为正在分析的状态，更新成功的话，此用户才分析的结果才会有奖励
 	 */
-	function lockUrl(bytes _id) public returns(bool res) {		
+	function lockUrl(uint _id) public returns(bool res) {		
 		require (_id > 0);
 
 		if (lockMap.contains()){
 			return false;
 		}
 		
-		bytes u = urls[_id];
-		if(u == 0 || u.status == 0){
+		URL storage u = urls[_id];
+		if(u.status == 0){
 			return false;
 		}
 
@@ -172,15 +161,15 @@ contract Datastore is Owable {
 	/*
 	 * 记录url的类别
 	 */	
-	function fillCates (bytes _id, bytes _url, bytes _cates) public returns(bool res) {
+	function fillCates (uint _id, bytes _url, bytes _cates) public returns(bool res) {
 	 	require (_id > 0 && _cates.length > 0);
 	 	
 	 	if(lockMap.get() != _id){
 	 		return false;
 	 	}
 
-	 	uint u = urls[_id];
-	 	if(u != 0 && _url == u.url){
+	 	URL storage u = urls[_id];
+	 	if(bytesEquals(_url, u.url)){
 	 		u.cates = _cates;
 	 		u.analysor = msg.sender;
 	 		if (u.status == 1) {
@@ -199,7 +188,7 @@ contract Datastore is Owable {
 		require (_amount > 0);
 		require (carbon.balanceOf(msg.sender) > _amount);
 		
-		carbon.transferFrom(address(this), _amount);
+		carbon.transferFrom(msg.sender, address(this), _amount);
 		balances[msg.sender] = balances[msg.sender].add(_amount);
 	}
 	
@@ -218,27 +207,27 @@ contract Datastore is Owable {
 
 		require (msg.value > 0);
 
-		balances[from] = balances[_from].sub(_amount);
-	    balances[to] = balances[_to].add(_amount);
+		balances[_from] = balances[_from].sub(_amount);
+	    balances[_to] = balances[_to].add(_amount);
 	}
 
 	/*
-	 * 获取元素在数组中的位置，找不到为-1
+	 * 获取元素在数组中的位置，找不到为0
 	 */
-	function indexOf (uint[] _collection, uint _elem) public returns(uint _index) {
+	function indexOf (uint[] storage _collection, uint _elem) internal view returns(uint _index) {
 		uint length = _collection.length;
 		for (uint i = 0; i < length; i++) {
 			if(_collection[i] == _elem){
 				return i;
 			}
 		}
-		return -1;
+		return 0;
 	}
 	
 	/*
 	 * 添加id到集合中，首先利用空着的位置（值为0，id > 0）
 	 */
-	function addIndex(uint[] _collection, uint _id) internal returns(bool _res) {
+	function addIndex(uint[] storage _collection, uint _id) internal returns(bool _res) {
 		uint length = _collection.length;
 		for (uint i = 0; i < length; i++) {
 			if(_collection[i] == 0){
@@ -254,11 +243,25 @@ contract Datastore is Owable {
 	/*
 	 * 移除id, 将id对应的位置值设置为0
 	 */
-	function removeIndex(uint[] _collection, uint _id) internal returns(bool _res) {
+	function removeIndex(uint[] storage _collection, uint _id) internal returns(bool _res) {
 		uint index = indexOf(_collection, _id);
-		if(index != -1 ){
+		if(index != 0 ){
 			_collection[index] = 0;
 		}
 		return true;
 	}
+
+	function bytesEquals (bytes a, bytes b) internal pure returns(bool res) {
+		if( a.length == b.length){
+			return false;
+		}
+
+		for(uint i=0; i < a.length; i++){
+			if(a[i] != b[i]){
+				return false;
+			}
+		}
+		return true;
+	}
+	
 }

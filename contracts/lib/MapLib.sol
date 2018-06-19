@@ -32,19 +32,19 @@ library MapLib {
 		self.data[msg.sender].value = LockTime(_id,now);
 		uint keyIndex = self.data[msg.sender].keyIndex;
 
-		if( keyIndex < 0){
-			keyIndex = self.keys.length;
-	    	self.data[msg.sender].keyIndex = keyIndex;
-	    	self.keys[keyIndex].key = key;
+		if( keyIndex == 0){
+			keyIndex = self.keys.length ++;
+	    	self.data[msg.sender].keyIndex = keyIndex + 1;
+	    	self.keys[keyIndex].analysor = msg.sender;
 	    	self.size++;
 		}
 
 		return true;
 	}
 
-	function get (LockMap storage self) internal returns(uint id) {
+	function get (LockMap storage self) internal view returns(uint id) {
 		if (contains(self)){
-			return self.data[key].value.id;
+			return self.data[msg.sender].value.id;
 		}
 		return 0;
 	}
@@ -56,31 +56,31 @@ library MapLib {
 	    	return false;
 
 	    delete self.data[key];
-	    self.keys[keyIndex].deleted = true;
+	    self.keys[keyIndex - 1].deleted = true;
 	    self.size--;
 
 	    return true;
 	}
 	
 	
-	function contains (LockMap storage self) public returns(bool res) {
-		return self.data[msg.send].keyIndex > -1;
+	function contains (LockMap storage self) public view returns(bool res) {
+		return self.data[msg.sender].keyIndex > 0;
 	}
 
-	function size () public returns(uint res) {
+	function size (LockMap storage self) public view returns(uint res) {
 		return self.size;
 	}
 	
-	function iterateStart(LockMap storage self) public returns(uint index) {
-		return iterateNext(-1);
+	function iterateStart(LockMap storage self) public view returns(uint index) {
+		return iterateNext(self, 0);
 	}
 	
 
-	function iterateNext (LockMap storage self, uint keyIndex) public returns(uint index) {
+	function iterateNext (LockMap storage self, uint keyIndex) public view returns(uint index) {
 		keyIndex++;
 
-		if(keyIndex >= self.keys.length){
-	    	return -1;
+		if(keyIndex > self.keys.length){
+	    	return 0;
 	    }
 
 	    while (keyIndex < self.keys.length && self.keys[keyIndex].deleted){
@@ -90,13 +90,13 @@ library MapLib {
 	    return keyIndex;
 	}
 
-	function iterateGet (LockMap storage self, uint keyIndex) public returns(address key, uint id,uint timestamp)  {
+	function iterateGet (LockMap storage self, uint keyIndex) public view returns(address key, uint id,uint timestamp)  {
 		if(keyIndex >= self.keys.length){
 			return (msg.sender,0,0);
 	    }
 
-	    key = self.keys[keyIndex].key;
-	    value = self.data[key].value;
+	    key = self.keys[keyIndex].analysor;
+	    LockTime storage value = self.data[key].value;
 
 	    return (key, value.id, value.timestamp);
 	}
