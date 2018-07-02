@@ -5,13 +5,14 @@ module.exports = {
     development: {
       host: '127.0.0.1',
       port: 9545,
-      network_id: '*', // Match any network id
-      gas: 10000000
+      network_id: '*' // Match any network id
+      //gas: 10000000
     },
     rinkeby: {
       host: '127.0.0.1',
       port: 8545,
       network_id: '*' // Match any network id
+      //gas: 8000000
     },
     main: {
       host: '127.0.0.1',

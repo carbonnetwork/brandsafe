@@ -1,0 +1,3082 @@
+{
+  "contractName": "Lockstore",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_caller",
+          "type": "address"
+        }
+      ],
+      "name": "setCaller",
+      "outputs": [
+        {
+          "name": "res",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_caller",
+          "type": "address"
+        }
+      ],
+      "name": "removeCaller",
+      "outputs": [
+        {
+          "name": "res",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "put",
+      "outputs": [
+        {
+          "name": "res",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "contains",
+      "outputs": [
+        {
+          "name": "res",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "start",
+      "outputs": [
+        {
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "get",
+      "outputs": [
+        {
+          "name": "key",
+          "type": "address"
+        },
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "getID",
+      "outputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "key",
+          "type": "address"
+        }
+      ],
+      "name": "deleteIt",
+      "outputs": [
+        {
+          "name": "res",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "next",
+      "outputs": [
+        {
+          "name": "res",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610ce0806100606000396000f3006080604052600436106100a4576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680635dbe47e8146100a95780637f8d53c6146101045780638da5cb5b146101695780639507d39a146101c057806399f826a51461023b578063a4ad69ee14610292578063be9a6555146102ed578063beb92f5514610318578063edd004e514610373578063eef21cd2146103b4575b600080fd5b3480156100b557600080fd5b506100ea600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061040f565b604051808215151515815260200191505060405180910390f35b34801561011057600080fd5b5061014f600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506104f5565b604051808215151515815260200191505060405180910390f35b34801561017557600080fd5b5061017e610644565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156101cc57600080fd5b506101eb60048036038101908080359060200190929190505050610669565b604051808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001838152602001828152602001935050505060405180910390f35b34801561024757600080fd5b5061027c600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610740565b6040518082815260200191505060405180910390f35b34801561029e57600080fd5b506102d3600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061075d565b604051808215151515815260200191505060405180910390f35b3480156102f957600080fd5b506103026108a3565b6040518082815260200191505060405180910390f35b34801561032457600080fd5b50610359600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610953565b604051808215151515815260200191505060405180910390f35b34801561037f57600080fd5b5061039e60048036038101908080359060200190929190505050610a4d565b6040518082815260200191505060405180910390f35b3480156103c057600080fd5b506103f5600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610b07565b604051808215151515815260200191505060405180910390f35b6000600273__MapLib________________________________63d7082c5e9091846040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808381526020018273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019250505060206040518083038186803b1580156104b357600080fd5b505af41580156104c7573d6000803e3d6000fd5b505050506040513d60208110156104dd57600080fd5b81019080805190602001909291905050509050919050565b600060018060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1660ff1614151561055457600080fd5b600273__MapLib________________________________6371fecd27909185856040518463ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808481526020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001828152602001935050505060206040518083038186803b1580156105fe57600080fd5b505af4158015610612573d6000803e3d6000fd5b505050506040513d602081101561062857600080fd5b8101908080519060200190929190505050506001905092915050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000806000600273__MapLib________________________________6359e66b0d9091866040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808381526020018281526020019250505060606040518083038186803b1580156106e457600080fd5b505af41580156106f8573d6000803e3d6000fd5b505050506040513d606081101561070e57600080fd5b810190808051906020019092919080519060200190929190805190602001909291905050509250925092509193909250565b6000610756826002610bf890919063ffffffff16565b9050919050565b600060018060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1660ff161415156107bc57600080fd5b600273__MapLib________________________________63f26138e89091846040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808381526020018273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019250505060206040518083038186803b15801561085e57600080fd5b505af4158015610872573d6000803e3d6000fd5b505050506040513d602081101561088857600080fd5b81019080805190602001909291905050505060019050919050565b6000600273__MapLib________________________________63c01c1abc90916040518263ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018082815260200191505060206040518083038186803b15801561091357600080fd5b505af4158015610927573d6000803e3d6000fd5b505050506040513d602081101561093d57600080fd5b8101908080519060200190929190505050905090565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156109b057600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff16141515156109ec57600080fd5b60018060008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff021916908360ff16021790555060019050919050565b6000600273__MapLib________________________________63d0e757c89091846040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808381526020018281526020019250505060206040518083038186803b158015610ac557600080fd5b505af4158015610ad9573d6000803e3d6000fd5b505050506040513d6020811015610aef57600080fd5b81019080805190602001909291905050509050919050565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610b6457600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff1614151515610ba057600080fd5b600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81549060ff021916905560019050919050565b6000610c048383610c63565b15610c58578260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600101600001549050610c5d565b600090505b92915050565b6000808360000160008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000154119050929150505600a165627a7a72305820b0813a8d3ba4e9f48241d58d2de12f3898580749bbccfed07fc2cba290d6c4b80029",
+  "deployedBytecode": "0x6080604052600436106100a4576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680635dbe47e8146100a95780637f8d53c6146101045780638da5cb5b146101695780639507d39a146101c057806399f826a51461023b578063a4ad69ee14610292578063be9a6555146102ed578063beb92f5514610318578063edd004e514610373578063eef21cd2146103b4575b600080fd5b3480156100b557600080fd5b506100ea600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061040f565b604051808215151515815260200191505060405180910390f35b34801561011057600080fd5b5061014f600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506104f5565b604051808215151515815260200191505060405180910390f35b34801561017557600080fd5b5061017e610644565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156101cc57600080fd5b506101eb60048036038101908080359060200190929190505050610669565b604051808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001838152602001828152602001935050505060405180910390f35b34801561024757600080fd5b5061027c600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610740565b6040518082815260200191505060405180910390f35b34801561029e57600080fd5b506102d3600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061075d565b604051808215151515815260200191505060405180910390f35b3480156102f957600080fd5b506103026108a3565b6040518082815260200191505060405180910390f35b34801561032457600080fd5b50610359600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610953565b604051808215151515815260200191505060405180910390f35b34801561037f57600080fd5b5061039e60048036038101908080359060200190929190505050610a4d565b6040518082815260200191505060405180910390f35b3480156103c057600080fd5b506103f5600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610b07565b604051808215151515815260200191505060405180910390f35b6000600273__MapLib________________________________63d7082c5e9091846040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808381526020018273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019250505060206040518083038186803b1580156104b357600080fd5b505af41580156104c7573d6000803e3d6000fd5b505050506040513d60208110156104dd57600080fd5b81019080805190602001909291905050509050919050565b600060018060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1660ff1614151561055457600080fd5b600273__MapLib________________________________6371fecd27909185856040518463ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808481526020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001828152602001935050505060206040518083038186803b1580156105fe57600080fd5b505af4158015610612573d6000803e3d6000fd5b505050506040513d602081101561062857600080fd5b8101908080519060200190929190505050506001905092915050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000806000600273__MapLib________________________________6359e66b0d9091866040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808381526020018281526020019250505060606040518083038186803b1580156106e457600080fd5b505af41580156106f8573d6000803e3d6000fd5b505050506040513d606081101561070e57600080fd5b810190808051906020019092919080519060200190929190805190602001909291905050509250925092509193909250565b6000610756826002610bf890919063ffffffff16565b9050919050565b600060018060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1660ff161415156107bc57600080fd5b600273__MapLib________________________________63f26138e89091846040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808381526020018273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019250505060206040518083038186803b15801561085e57600080fd5b505af4158015610872573d6000803e3d6000fd5b505050506040513d602081101561088857600080fd5b81019080805190602001909291905050505060019050919050565b6000600273__MapLib________________________________63c01c1abc90916040518263ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018082815260200191505060206040518083038186803b15801561091357600080fd5b505af4158015610927573d6000803e3d6000fd5b505050506040513d602081101561093d57600080fd5b8101908080519060200190929190505050905090565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156109b057600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff16141515156109ec57600080fd5b60018060008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff021916908360ff16021790555060019050919050565b6000600273__MapLib________________________________63d0e757c89091846040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808381526020018281526020019250505060206040518083038186803b158015610ac557600080fd5b505af4158015610ad9573d6000803e3d6000fd5b505050506040513d6020811015610aef57600080fd5b81019080805190602001909291905050509050919050565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610b6457600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff1614151515610ba057600080fd5b600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81549060ff021916905560019050919050565b6000610c048383610c63565b15610c58578260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600101600001549050610c5d565b600090505b92915050565b6000808360000160008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000154119050929150505600a165627a7a72305820b0813a8d3ba4e9f48241d58d2de12f3898580749bbccfed07fc2cba290d6c4b80029",
+  "sourceMap": "133:884:5:-;;;226:29;8:9:-1;5:2;;;30:1;27;20:12;5:2;226:29:5;158:10:11;150:5;;:18;;;;;;;;;;;;;;;;;;133:884:5;;;;;;",
+  "deployedSourceMap": "133:884:5:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;382:101;;8:9:-1;5:2;;;30:1;27;20:12;5:2;382:101:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;258:119;;8:9:-1;5:2;;;30:1;27;20:12;5:2;258:119:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;100:20:11;;8:9:-1;5:2;;;30:1;27;20:12;5:2;100:20:11;;;;;;;;;;;;;;;;;;;;;;;;;;;575:124:5;;8:9:-1;5:2;;;30:1;27;20:12;5:2;575:124:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;702:91;;8:9:-1;5:2;;;30:1;27;20:12;5:2;702:91:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;799:112;;8:9:-1;5:2;;;30:1;27;20:12;5:2;799:112:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;487:85;;8:9:-1;5:2;;;30:1;27;20:12;5:2;487:85:5;;;;;;;;;;;;;;;;;;;;;;;272:152:6;;8:9:-1;5:2;;;30:1;27;20:12;5:2;272:152:6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;916:97:5;;8:9:-1;5:2;;;30:1;27;20:12;5:2;916:97:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;427:156:6;;8:9:-1;5:2;;;30:1;27;20:12;5:2;427:156:6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;382:101:5;435:8;457:7;:16;;;;474:4;457:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;457:22:5;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;457:22:5;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;457:22:5;;;;;;;;;;;;;;;;450:29;;382:101;;;:::o;258:119::-;323:8;255:1:6;232:7;:19;240:10;232:19;;;;;;;;;;;;;;;;;;;;;;;;;:24;;;223:34;;;;;;;;337:7:5;:11;;;;349:4;355:2;337:21;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;337:21:5;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;337:21:5;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;337:21:5;;;;;;;;;;;;;;;;;369:4;362:11;;258:119;;;;:::o;100:20:11:-;;;;;;;;;;;;;:::o;575:124:5:-;621:11;634:7;643:14;670:7;:18;;;;689:5;670:25;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;670:25:5;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;670:25:5;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;670:25:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;663:32;;;;;;575:124;;;;;:::o;702:91::-;752:7;772:17;784:4;772:7;:11;;:17;;;;:::i;:::-;765:24;;702:91;;;:::o;799:112::-;859:8;255:1:6;232:7;:19;240:10;232:19;;;;;;;;;;;;;;;;;;;;;;;;;:24;;;223:34;;;;;;;;873:7:5;:14;;;;888:3;873:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;873:19:5;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;873:19:5;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;873:19:5;;;;;;;;;;;;;;;;;903:4;896:11;;799:112;;;:::o;487:85::-;524:10;546:7;:20;;;;:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;546:22:5;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;546:22:5;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;546:22:5;;;;;;;;;;;;;;;;539:29;;487:85;:::o;272:152:6:-;334:8;226:5:11;;;;;;;;;;;212:19;;:10;:19;;;204:28;;;;;;;;378:1:6;359:21;;:7;:21;;;;350:31;;;;;;;;404:1;385:7;:16;393:7;385:16;;;;;;;;;;;;;;;;:20;;;;;;;;;;;;;;;;;;416:4;409:11;;272:152;;;:::o;916:97:5:-;962:8;983:7;:19;;;;1003:5;983:26;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;983:26:5;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;983:26:5;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;983:26:5;;;;;;;;;;;;;;;;976:33;;916:97;;;:::o;427:156:6:-;492:8;226:5:11;;;;;;;;;;;212:19;;:10;:19;;;204:28;;;;;;;;534:1:6;515:21;;:7;:21;;;;506:31;;;;;;;;548:7;:16;556:7;548:16;;;;;;;;;;;;;;;;541:23;;;;;;;;;;;575:4;568:11;;427:156;;;:::o;772:166:8:-;844:7;861:20;870:4;876;861:8;:20::i;:::-;857:66;;;894:4;:9;;:15;904:4;894:15;;;;;;;;;;;;;;;:21;;:24;;;887:31;;;;857:66;933:1;926:8;;772:166;;;;;:::o;1231:128::-;1306:8;1354:1;1327:4;:9;;:15;1337:4;1327:15;;;;;;;;;;;;;;;:24;;;:28;1320:35;;1231:128;;;;:::o",
+  "source": "pragma solidity ^0.4.23;\n\n\nimport \"./Manager.sol\";\n\nimport \"./lib/MapLib.sol\";\n\n\n\n/**\n * The Lock contract does this and that...\n */\ncontract Lockstore is Manager {\n\tusing MapLib for MapLib.LockMap;\n\tMapLib.LockMap lockMap;\n\n\tconstructor () public {\n\t\t\n\t}\n\n\tfunction put (address user, uint id) public onlyLicensee returns(bool res) {\n\t\tlockMap.put(user, id);\n\t\treturn true;\n\t}\n\t\n\n\tfunction contains (address user) public view returns(bool res)  {\n\t\treturn lockMap.contains(user);\n\t}\n \n\tfunction start() public view returns(uint index){\n\t\treturn lockMap.iterateStart();\n\t}\n\n\tfunction get (uint index) public view returns(address key, uint id, uint timestamp) {\n\t\treturn lockMap.iterateGet(index);\n\t}\n\n\tfunction getID (address user) public view returns(uint id) {\n\t\treturn lockMap.get(user);\n\t}\n\t\n\t\n\tfunction deleteIt (address key) public onlyLicensee returns(bool res) {\n\t\tlockMap.remove(key);\n\t\treturn true;\n\t}\n\t\n\n\tfunction next(uint index) public view returns(uint res) {\n\t\treturn lockMap.iterateNext(index);\n\t}\n\t\n}\n",
+  "sourcePath": "/Users/iclick/blockchain/ethereum/brandsafe/contracts/Lockstore.sol",
+  "ast": {
+    "absolutePath": "/Users/iclick/blockchain/ethereum/brandsafe/contracts/Lockstore.sol",
+    "exportedSymbols": {
+      "Lockstore": [
+        1120
+      ]
+    },
+    "id": 1121,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1001,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "absolutePath": "/Users/iclick/blockchain/ethereum/brandsafe/contracts/Manager.sol",
+        "file": "./Manager.sol",
+        "id": 1002,
+        "nodeType": "ImportDirective",
+        "scope": 1121,
+        "sourceUnit": 1195,
+        "src": "27:23:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/iclick/blockchain/ethereum/brandsafe/contracts/lib/MapLib.sol",
+        "file": "./lib/MapLib.sol",
+        "id": 1003,
+        "nodeType": "ImportDirective",
+        "scope": 1121,
+        "sourceUnit": 1632,
+        "src": "52:26:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1004,
+              "name": "Manager",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1194,
+              "src": "155:7:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Manager_$1194",
+                "typeString": "contract Manager"
+              }
+            },
+            "id": 1005,
+            "nodeType": "InheritanceSpecifier",
+            "src": "155:7:5"
+          }
+        ],
+        "contractDependencies": [
+          1194,
+          1732
+        ],
+        "contractKind": "contract",
+        "documentation": "The Lock contract does this and that...",
+        "fullyImplemented": true,
+        "id": 1120,
+        "linearizedBaseContracts": [
+          1120,
+          1194,
+          1732
+        ],
+        "name": "Lockstore",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 1008,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1006,
+              "name": "MapLib",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1631,
+              "src": "172:6:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MapLib_$1631",
+                "typeString": "library MapLib"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "166:32:5",
+            "typeName": {
+              "contractScope": null,
+              "id": 1007,
+              "name": "MapLib.LockMap",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1330,
+              "src": "183:14:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_LockMap_$1330_storage_ptr",
+                "typeString": "struct MapLib.LockMap"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 1010,
+            "name": "lockMap",
+            "nodeType": "VariableDeclaration",
+            "scope": 1120,
+            "src": "200:22:5",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+              "typeString": "struct MapLib.LockMap"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 1009,
+              "name": "MapLib.LockMap",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1330,
+              "src": "200:14:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_LockMap_$1330_storage_ptr",
+                "typeString": "struct MapLib.LockMap"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1013,
+              "nodeType": "Block",
+              "src": "248:7:5",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 1014,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1011,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "238:2:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1012,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "248:0:5"
+            },
+            "scope": 1120,
+            "src": "226:29:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1034,
+              "nodeType": "Block",
+              "src": "333:44:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1028,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1016,
+                        "src": "349:4:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1029,
+                        "name": "id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1018,
+                        "src": "355:2:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1025,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "337:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1027,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "put",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1424,
+                      "src": "337:11:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_nonpayable$_t_struct$_LockMap_$1330_storage_ptr_$_t_address_$_t_uint256_$returns$_t_bool_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,address,uint256) returns (bool)"
+                      }
+                    },
+                    "id": 1030,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "337:21:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 1031,
+                  "nodeType": "ExpressionStatement",
+                  "src": "337:21:5"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 1032,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "369:4:5",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 1024,
+                  "id": 1033,
+                  "nodeType": "Return",
+                  "src": "362:11:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1035,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 1021,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 1020,
+                  "name": "onlyLicensee",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1142,
+                  "src": "302:12:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "302:12:5"
+              }
+            ],
+            "name": "put",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1019,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1016,
+                  "name": "user",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1035,
+                  "src": "272:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1015,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "272:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1018,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1035,
+                  "src": "286:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1017,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "286:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "271:23:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1024,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1023,
+                  "name": "res",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1035,
+                  "src": "323:8:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1022,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "323:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "322:10:5"
+            },
+            "scope": 1120,
+            "src": "258:119:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1047,
+              "nodeType": "Block",
+              "src": "446:37:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1044,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1037,
+                        "src": "474:4:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1042,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "457:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1043,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "contains",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1515,
+                      "src": "457:16:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_view$_t_struct$_LockMap_$1330_storage_ptr_$_t_address_$returns$_t_bool_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,address) view returns (bool)"
+                      }
+                    },
+                    "id": 1045,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "457:22:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 1041,
+                  "id": 1046,
+                  "nodeType": "Return",
+                  "src": "450:29:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1048,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "contains",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1038,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1037,
+                  "name": "user",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1048,
+                  "src": "401:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1036,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "401:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "400:14:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1041,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1040,
+                  "name": "res",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1048,
+                  "src": "435:8:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1039,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "435:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "434:10:5"
+            },
+            "scope": 1120,
+            "src": "382:101:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1057,
+              "nodeType": "Block",
+              "src": "535:37:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1053,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "546:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1054,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "iterateStart",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1539,
+                      "src": "546:20:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_view$_t_struct$_LockMap_$1330_storage_ptr_$returns$_t_uint256_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer) view returns (uint256)"
+                      }
+                    },
+                    "id": 1055,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "546:22:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1052,
+                  "id": 1056,
+                  "nodeType": "Return",
+                  "src": "539:29:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1058,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "start",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1049,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "501:2:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1052,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1051,
+                  "name": "index",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1058,
+                  "src": "524:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1050,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "524:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "523:12:5"
+            },
+            "scope": 1120,
+            "src": "487:85:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1074,
+              "nodeType": "Block",
+              "src": "659:40:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1071,
+                        "name": "index",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1060,
+                        "src": "689:5:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1069,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "670:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1070,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "iterateGet",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1630,
+                      "src": "670:18:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_view$_t_struct$_LockMap_$1330_storage_ptr_$_t_uint256_$returns$_t_address_$_t_uint256_$_t_uint256_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,uint256) view returns (address,uint256,uint256)"
+                      }
+                    },
+                    "id": 1072,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "670:25:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_address_$_t_uint256_$_t_uint256_$",
+                      "typeString": "tuple(address,uint256,uint256)"
+                    }
+                  },
+                  "functionReturnParameters": 1068,
+                  "id": 1073,
+                  "nodeType": "Return",
+                  "src": "663:32:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1075,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "get",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1061,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1060,
+                  "name": "index",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1075,
+                  "src": "589:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1059,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "589:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "588:12:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1068,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1063,
+                  "name": "key",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1075,
+                  "src": "621:11:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1062,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "621:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1065,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1075,
+                  "src": "634:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1064,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "634:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1067,
+                  "name": "timestamp",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1075,
+                  "src": "643:14:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1066,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "643:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "620:38:5"
+            },
+            "scope": 1120,
+            "src": "575:124:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1087,
+              "nodeType": "Block",
+              "src": "761:32:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1084,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1077,
+                        "src": "784:4:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1082,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "772:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1083,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "get",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1449,
+                      "src": "772:11:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$_t_struct$_LockMap_$1330_storage_ptr_$_t_address_$returns$_t_uint256_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,address) view returns (uint256)"
+                      }
+                    },
+                    "id": 1085,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "772:17:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1081,
+                  "id": 1086,
+                  "nodeType": "Return",
+                  "src": "765:24:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1088,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "getID",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1078,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1077,
+                  "name": "user",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1088,
+                  "src": "718:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1076,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "718:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "717:14:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1081,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1080,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1088,
+                  "src": "752:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1079,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "752:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "751:9:5"
+            },
+            "scope": 1120,
+            "src": "702:91:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1105,
+              "nodeType": "Block",
+              "src": "869:42:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1100,
+                        "name": "key",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1090,
+                        "src": "888:3:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1097,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "873:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1099,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "remove",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1497,
+                      "src": "873:14:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_nonpayable$_t_struct$_LockMap_$1330_storage_ptr_$_t_address_$returns$_t_bool_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,address) returns (bool)"
+                      }
+                    },
+                    "id": 1101,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "873:19:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 1102,
+                  "nodeType": "ExpressionStatement",
+                  "src": "873:19:5"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 1103,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "903:4:5",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 1096,
+                  "id": 1104,
+                  "nodeType": "Return",
+                  "src": "896:11:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1106,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 1093,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 1092,
+                  "name": "onlyLicensee",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1142,
+                  "src": "838:12:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "838:12:5"
+              }
+            ],
+            "name": "deleteIt",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1091,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1090,
+                  "name": "key",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1106,
+                  "src": "818:11:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1089,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "818:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "817:13:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1096,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1095,
+                  "name": "res",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1106,
+                  "src": "859:8:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1094,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "859:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "858:10:5"
+            },
+            "scope": 1120,
+            "src": "799:112:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1118,
+              "nodeType": "Block",
+              "src": "972:41:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1115,
+                        "name": "index",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1108,
+                        "src": "1003:5:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1113,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "983:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1114,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "iterateNext",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1579,
+                      "src": "983:19:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_view$_t_struct$_LockMap_$1330_storage_ptr_$_t_uint256_$returns$_t_uint256_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,uint256) view returns (uint256)"
+                      }
+                    },
+                    "id": 1116,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "983:26:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1112,
+                  "id": 1117,
+                  "nodeType": "Return",
+                  "src": "976:33:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1119,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "next",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1109,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1108,
+                  "name": "index",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1119,
+                  "src": "930:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1107,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "930:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "929:12:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1112,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1111,
+                  "name": "res",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1119,
+                  "src": "962:8:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1110,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "962:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "961:10:5"
+            },
+            "scope": 1120,
+            "src": "916:97:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1121,
+        "src": "133:884:5"
+      }
+    ],
+    "src": "0:1018:5"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/iclick/blockchain/ethereum/brandsafe/contracts/Lockstore.sol",
+    "exportedSymbols": {
+      "Lockstore": [
+        1120
+      ]
+    },
+    "id": 1121,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1001,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "absolutePath": "/Users/iclick/blockchain/ethereum/brandsafe/contracts/Manager.sol",
+        "file": "./Manager.sol",
+        "id": 1002,
+        "nodeType": "ImportDirective",
+        "scope": 1121,
+        "sourceUnit": 1195,
+        "src": "27:23:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/iclick/blockchain/ethereum/brandsafe/contracts/lib/MapLib.sol",
+        "file": "./lib/MapLib.sol",
+        "id": 1003,
+        "nodeType": "ImportDirective",
+        "scope": 1121,
+        "sourceUnit": 1632,
+        "src": "52:26:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1004,
+              "name": "Manager",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1194,
+              "src": "155:7:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Manager_$1194",
+                "typeString": "contract Manager"
+              }
+            },
+            "id": 1005,
+            "nodeType": "InheritanceSpecifier",
+            "src": "155:7:5"
+          }
+        ],
+        "contractDependencies": [
+          1194,
+          1732
+        ],
+        "contractKind": "contract",
+        "documentation": "The Lock contract does this and that...",
+        "fullyImplemented": true,
+        "id": 1120,
+        "linearizedBaseContracts": [
+          1120,
+          1194,
+          1732
+        ],
+        "name": "Lockstore",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 1008,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1006,
+              "name": "MapLib",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1631,
+              "src": "172:6:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MapLib_$1631",
+                "typeString": "library MapLib"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "166:32:5",
+            "typeName": {
+              "contractScope": null,
+              "id": 1007,
+              "name": "MapLib.LockMap",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1330,
+              "src": "183:14:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_LockMap_$1330_storage_ptr",
+                "typeString": "struct MapLib.LockMap"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 1010,
+            "name": "lockMap",
+            "nodeType": "VariableDeclaration",
+            "scope": 1120,
+            "src": "200:22:5",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+              "typeString": "struct MapLib.LockMap"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 1009,
+              "name": "MapLib.LockMap",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1330,
+              "src": "200:14:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_LockMap_$1330_storage_ptr",
+                "typeString": "struct MapLib.LockMap"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1013,
+              "nodeType": "Block",
+              "src": "248:7:5",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 1014,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1011,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "238:2:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1012,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "248:0:5"
+            },
+            "scope": 1120,
+            "src": "226:29:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1034,
+              "nodeType": "Block",
+              "src": "333:44:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1028,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1016,
+                        "src": "349:4:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1029,
+                        "name": "id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1018,
+                        "src": "355:2:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1025,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "337:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1027,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "put",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1424,
+                      "src": "337:11:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_nonpayable$_t_struct$_LockMap_$1330_storage_ptr_$_t_address_$_t_uint256_$returns$_t_bool_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,address,uint256) returns (bool)"
+                      }
+                    },
+                    "id": 1030,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "337:21:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 1031,
+                  "nodeType": "ExpressionStatement",
+                  "src": "337:21:5"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 1032,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "369:4:5",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 1024,
+                  "id": 1033,
+                  "nodeType": "Return",
+                  "src": "362:11:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1035,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 1021,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 1020,
+                  "name": "onlyLicensee",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1142,
+                  "src": "302:12:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "302:12:5"
+              }
+            ],
+            "name": "put",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1019,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1016,
+                  "name": "user",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1035,
+                  "src": "272:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1015,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "272:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1018,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1035,
+                  "src": "286:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1017,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "286:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "271:23:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1024,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1023,
+                  "name": "res",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1035,
+                  "src": "323:8:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1022,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "323:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "322:10:5"
+            },
+            "scope": 1120,
+            "src": "258:119:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1047,
+              "nodeType": "Block",
+              "src": "446:37:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1044,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1037,
+                        "src": "474:4:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1042,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "457:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1043,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "contains",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1515,
+                      "src": "457:16:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_view$_t_struct$_LockMap_$1330_storage_ptr_$_t_address_$returns$_t_bool_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,address) view returns (bool)"
+                      }
+                    },
+                    "id": 1045,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "457:22:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 1041,
+                  "id": 1046,
+                  "nodeType": "Return",
+                  "src": "450:29:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1048,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "contains",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1038,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1037,
+                  "name": "user",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1048,
+                  "src": "401:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1036,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "401:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "400:14:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1041,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1040,
+                  "name": "res",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1048,
+                  "src": "435:8:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1039,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "435:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "434:10:5"
+            },
+            "scope": 1120,
+            "src": "382:101:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1057,
+              "nodeType": "Block",
+              "src": "535:37:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1053,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "546:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1054,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "iterateStart",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1539,
+                      "src": "546:20:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_view$_t_struct$_LockMap_$1330_storage_ptr_$returns$_t_uint256_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer) view returns (uint256)"
+                      }
+                    },
+                    "id": 1055,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "546:22:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1052,
+                  "id": 1056,
+                  "nodeType": "Return",
+                  "src": "539:29:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1058,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "start",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1049,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "501:2:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1052,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1051,
+                  "name": "index",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1058,
+                  "src": "524:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1050,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "524:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "523:12:5"
+            },
+            "scope": 1120,
+            "src": "487:85:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1074,
+              "nodeType": "Block",
+              "src": "659:40:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1071,
+                        "name": "index",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1060,
+                        "src": "689:5:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1069,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "670:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1070,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "iterateGet",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1630,
+                      "src": "670:18:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_view$_t_struct$_LockMap_$1330_storage_ptr_$_t_uint256_$returns$_t_address_$_t_uint256_$_t_uint256_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,uint256) view returns (address,uint256,uint256)"
+                      }
+                    },
+                    "id": 1072,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "670:25:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_address_$_t_uint256_$_t_uint256_$",
+                      "typeString": "tuple(address,uint256,uint256)"
+                    }
+                  },
+                  "functionReturnParameters": 1068,
+                  "id": 1073,
+                  "nodeType": "Return",
+                  "src": "663:32:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1075,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "get",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1061,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1060,
+                  "name": "index",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1075,
+                  "src": "589:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1059,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "589:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "588:12:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1068,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1063,
+                  "name": "key",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1075,
+                  "src": "621:11:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1062,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "621:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1065,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1075,
+                  "src": "634:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1064,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "634:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1067,
+                  "name": "timestamp",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1075,
+                  "src": "643:14:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1066,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "643:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "620:38:5"
+            },
+            "scope": 1120,
+            "src": "575:124:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1087,
+              "nodeType": "Block",
+              "src": "761:32:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1084,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1077,
+                        "src": "784:4:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1082,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "772:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1083,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "get",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1449,
+                      "src": "772:11:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$_t_struct$_LockMap_$1330_storage_ptr_$_t_address_$returns$_t_uint256_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,address) view returns (uint256)"
+                      }
+                    },
+                    "id": 1085,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "772:17:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1081,
+                  "id": 1086,
+                  "nodeType": "Return",
+                  "src": "765:24:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1088,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "getID",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1078,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1077,
+                  "name": "user",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1088,
+                  "src": "718:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1076,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "718:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "717:14:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1081,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1080,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1088,
+                  "src": "752:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1079,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "752:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "751:9:5"
+            },
+            "scope": 1120,
+            "src": "702:91:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1105,
+              "nodeType": "Block",
+              "src": "869:42:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1100,
+                        "name": "key",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1090,
+                        "src": "888:3:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1097,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "873:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1099,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "remove",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1497,
+                      "src": "873:14:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_nonpayable$_t_struct$_LockMap_$1330_storage_ptr_$_t_address_$returns$_t_bool_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,address) returns (bool)"
+                      }
+                    },
+                    "id": 1101,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "873:19:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 1102,
+                  "nodeType": "ExpressionStatement",
+                  "src": "873:19:5"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 1103,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "903:4:5",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 1096,
+                  "id": 1104,
+                  "nodeType": "Return",
+                  "src": "896:11:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1106,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 1093,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 1092,
+                  "name": "onlyLicensee",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1142,
+                  "src": "838:12:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "838:12:5"
+              }
+            ],
+            "name": "deleteIt",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1091,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1090,
+                  "name": "key",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1106,
+                  "src": "818:11:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1089,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "818:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "817:13:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1096,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1095,
+                  "name": "res",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1106,
+                  "src": "859:8:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1094,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "859:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "858:10:5"
+            },
+            "scope": 1120,
+            "src": "799:112:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1118,
+              "nodeType": "Block",
+              "src": "972:41:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1115,
+                        "name": "index",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1108,
+                        "src": "1003:5:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1113,
+                        "name": "lockMap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1010,
+                        "src": "983:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_LockMap_$1330_storage",
+                          "typeString": "struct MapLib.LockMap storage ref"
+                        }
+                      },
+                      "id": 1114,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "iterateNext",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1579,
+                      "src": "983:19:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_delegatecall_view$_t_struct$_LockMap_$1330_storage_ptr_$_t_uint256_$returns$_t_uint256_$bound_to$_t_struct$_LockMap_$1330_storage_ptr_$",
+                        "typeString": "function (struct MapLib.LockMap storage pointer,uint256) view returns (uint256)"
+                      }
+                    },
+                    "id": 1116,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "983:26:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1112,
+                  "id": 1117,
+                  "nodeType": "Return",
+                  "src": "976:33:5"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1119,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "next",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1109,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1108,
+                  "name": "index",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1119,
+                  "src": "930:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1107,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "930:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "929:12:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1112,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1111,
+                  "name": "res",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1119,
+                  "src": "962:8:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1110,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "962:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "961:10:5"
+            },
+            "scope": 1120,
+            "src": "916:97:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1121,
+        "src": "133:884:5"
+      }
+    ],
+    "src": "0:1018:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-07-02T08:48:01.718Z"
+}
