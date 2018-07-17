@@ -28,7 +28,7 @@ library MapLib {
 	
 	function put(LockMap storage self, address _key, uint _id) public returns(bool res) {
 
-		require (_key !=  address(0));
+		require (_key != address(0));
 		
 		self.data[_key].value = LockTime(_id,now);
 		uint keyIndex = self.data[_key].keyIndex;
@@ -73,16 +73,15 @@ library MapLib {
 	}
 	
 	function iterateStart(LockMap storage self) public view returns(uint index) {
-		return iterateNext(self, 0);
+		return iterateNext(self, uint(-1));
 	}
 	
+	function iterateValid(LockMap storage self, uint keyIndex) public view returns (bool){
+    	return keyIndex < self.keys.length;
+  	}
 
 	function iterateNext (LockMap storage self, uint keyIndex) public view returns(uint index) {
 		keyIndex++;
-
-		if(keyIndex > self.keys.length){
-	    	return 0;
-	    }
 
 	    while (keyIndex < self.keys.length && self.keys[keyIndex].deleted){
 	      keyIndex++;

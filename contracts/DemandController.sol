@@ -17,8 +17,7 @@ contract DemandController is Ownable{
 	 * 添加新的url
 	 */
 	function addURL(bytes _url, uint _price) public returns(bool res) {		
-		ds.insertURL(_url, _price);
-
+		ds.insertURL(_url, _price, msg.sender);
 		return true;
 	}
 

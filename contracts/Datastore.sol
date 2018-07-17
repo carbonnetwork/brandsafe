@@ -2,10 +2,7 @@ pragma solidity ^0.4.23;
 
 import "carbon-ico/contracts/Ownable.sol";
 
-import "./lib/MapLib.sol";
-import "./lib/ArraysLib.sol";
-import "./lib/StringLib.sol";
-
+import "./Index.sol";
 
 import "./Finance.sol";
 
@@ -15,10 +12,7 @@ import "./Finance.sol";
 /**
  * The Datastore contract does this and that...
  */
-contract Datastore is Finance {
-	using SafeMathLib for uint256;
-	using StringLib for bytes;
-	using ArraysLib for uint[];
+contract Datastore is Finance,Index {
 
 	struct URL {
 		address sender;
@@ -35,8 +29,6 @@ contract Datastore is Finance {
 	uint id;
 	
 	mapping (uint => URL) urls;
-	
-	mapping (uint8 => uint[]) statusIndex;
 
 	/*
 	//用于按日期组织内容，以方便清理旧的数据，留作扩展
@@ -53,11 +45,11 @@ contract Datastore is Finance {
 		
 	}
 	
-	function insertURL (bytes _url,uint256 _price) public onlyLicensee returns(uint _id) {
+	function insertURL (bytes _url,uint256 _price, address _sender) public onlyLicensee returns(bool res) {
 		require (_url.length > 0 && _price > 0);
 
 		URL memory url = URL({
-			sender : msg.sender,
+			sender : _sender,
 			url : _url,
 			price : _price,
 			status : 0,
@@ -68,13 +60,39 @@ contract Datastore is Finance {
 			exist : 1
 		});
 
-		_id = id++;
-		urls[_id] = url;
+		urls[++id] = url;
 
 		addStatusIndex(0, id);
 
-		return;
+		return true;
 	}
+
+	function getId() public view returns(uint res) {
+		return id;
+	}	
+
+	function setAnalysor (uint _id, address _analysor) public onlyLicensee returns(bool res) {
+		require (_id > 0);	
+		require (_analysor != address(0));
+
+		if(urls[_id].exist == 0){
+			return false;
+		}
+
+		URL storage u = urls[_id];
+		u.analysor = _analysor;
+		return true;
+	}
+	
+	function getAnalysor (uint _id) public view returns(address _analysor) {
+		require (_id > 0);
+
+		if(urls[_id].exist == 0){
+			return address(0);
+		}
+		return urls[_id].analysor;
+	}
+	
 
 	function setResult (uint _id, bytes _cates, address _analysor) public onlyLicensee returns(bool res) {		
 		require (_id > 0);
@@ -93,21 +111,6 @@ contract Datastore is Finance {
 	}
 			
 
-	function addStatusIndex (uint8 _status, uint _id) public onlyLicensee returns(bool res) {
-		require (_status < 3);
-		
-		uint[] storage ids = statusIndex[_status];
-		ids.addIndex(_id);
-		return true;
-	}
-
-
-	function getIndexByStatus(uint8 _status) public view returns(uint[] res) {
-		require (_status < 3);
-
-		return statusIndex[_status];
-	}
-
 	function changeStatus(uint8 _status, uint _id) public onlyLicensee returns(bool res) {
 		require (_id > 0);
 		
@@ -117,11 +120,11 @@ contract Datastore is Finance {
 
 		URL storage u = urls[id];
 		uint[] storage ids = statusIndex[u.status];
-		ids.removeIndex(_id);
+		//removeIndex(ids, _id);
 
 		u.status = _status;
 		ids = statusIndex[_status];
-		ids.addIndex(_id);
+		addIndex(ids, _id);
 		return true;
 	}
 	
@@ -136,15 +139,15 @@ contract Datastore is Finance {
 		return 0;
 	}
 	
-	function getURLByID (uint _id) public view returns(bytes _url, address _sender, uint256 _price )  {
+	function getURLByID (uint _id) public view returns(bytes _url, address _sender, uint256 _price, uint8 _status)  {
 		require (_id > 0);
 		
 		if(urls[_id].exist != 0){
 			URL storage u = urls[_id];
-			return (u.url, u.sender, u.price);
+			return (u.url, u.sender, u.price, u.status);
 		}
 		
-		return ("", address(0), 0);
+		return ("", address(0), 0, 0);
 	}
 							
 }

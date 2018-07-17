@@ -40,6 +40,9 @@ contract Lockstore is Manager {
 		return lockMap.get(user);
 	}
 	
+	function validIndex (uint index) public view returns(bool res) {
+		return lockMap.iterateValid(index);
+	}
 	
 	function deleteIt (address key) public onlyLicensee returns(bool res) {
 		lockMap.remove(key);
