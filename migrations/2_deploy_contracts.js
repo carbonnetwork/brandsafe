@@ -5,7 +5,6 @@ var Manager = artifacts.require("./Manager.sol");
 var Finance = artifacts.require("./Finance.sol");
 var MapLib = artifacts.require("./lib/MapLib.sol");
 var StringLib = artifacts.require("./lib/StringLib.sol");
-var ArraysLib = artifacts.require("./lib/ArraysLib.sol");
 var Datastore = artifacts.require("./Datastore.sol");
 var Lockstore = artifacts.require("./Lockstore.sol");
 var AdminController = artifacts.require("./AdminController.sol");
@@ -15,7 +14,6 @@ var AnalysisController = artifacts.require("./AnalysisController.sol");
 module.exports = function(deployer) {
   deployer.deploy(MapLib);
   deployer.deploy(StringLib);
-  deployer.deploy(ArraysLib);
   //deployer.deploy(Manager);
 
   deployer.deploy(SafeMathLib);
@@ -23,7 +21,6 @@ module.exports = function(deployer) {
   //deployer.deploy(Finance);
   
   deployer.link(SafeMathLib, Datastore);
-  deployer.link(ArraysLib, Datastore);
   deployer.deploy(Datastore);
 
   deployer.link(MapLib, Lockstore);
