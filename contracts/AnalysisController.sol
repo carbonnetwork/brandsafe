@@ -43,7 +43,7 @@ contract AnalysisController is Ownable {
 		uint price;
 
 		while (index >= 0 && ls.validIndex(index)){
-			(key, _id, timestamp) = ls.get(index);
+			(key, _id, timestamp) = ls.getByIndex(index);
 			if ( _id > 0 && now > timestamp + fiveMin){
 				(url, sender, price,) = ds.getURLByID(_id);
 
@@ -89,6 +89,7 @@ contract AnalysisController is Ownable {
 	function lockUrl(uint _id) public{		
 		require (_id > 0);
 
+		// The current analysor has job in progress
 		if (ls.contains(msg.sender)){
 			revert();
 		}		
@@ -98,22 +99,47 @@ contract AnalysisController is Ownable {
 		uint price;
 
 		(,sender, price, s) = ds.getURLByID(_id);
-		if (s  > 1 || ds.balanceOf(sender) < price){
+
+		// The sender's balance not enough
+		if (ds.balanceOf(sender) < price){
 			revert();
 		}
 
-		if(s == 0){
-			ds.changeStatus(1, _id);
-		} else {
-			address a = ds.getAnalysor(_id);
-			if(a != address(0)){
-				ls.deleteIt(a);
-			}	
-		}
+		checkStatus(_id, s);
 		
+		// set analysor to who get the job
 		ds.setAnalysor(_id, msg.sender);
 		ls.put(msg.sender, _id);
 	}
+
+	/*
+	 *
+	 */
+	function checkStatus (uint _id, uint8 s) internal {
+		// processed completed
+		if (s > 1 ){
+			revert();
+		} else if (s == 1) {
+			address a = ds.getAnalysor(_id);
+
+			if(a != address(0)){
+				uint timestamp;
+
+				(, timestamp) = ls.get(a);
+				// timeout
+				if (now > timestamp + fiveMin){
+					ls.deleteIt(a);
+				} else {
+					// being processed by another analysor
+					revert();
+				}			
+			}		
+		} else if(s == 0){
+			// change status to in progress
+			ds.changeStatus(1, _id);
+		} 
+	}
+
 
 	/*
 	 * 记录url的类别
@@ -128,11 +154,12 @@ contract AnalysisController is Ownable {
 	 	bytes memory url;
 		address sender;
 		uint price;
+		uint8 s;
 
-	 	(url, sender, price,) = ds.getURLByID(_id);
+	 	(url, sender, price, s) = ds.getURLByID(_id);
 	 	if(_url.bytesEquals(url)){
 	 		ds.setResult(_id, _cates, msg.sender);
-	 		if (ds.getStatusByID(_id) == 1) {
+	 		if (s == 1) {
 	 			ds.changeStatus(2,_id);
 	 		}
 	 		

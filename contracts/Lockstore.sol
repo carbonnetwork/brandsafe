@@ -32,13 +32,18 @@ contract Lockstore is Manager {
 		return lockMap.iterateStart();
 	}
 
-	function get (uint index) public view returns(address key, uint id, uint timestamp) {
+	function getByIndex (uint index) public view returns(address key, uint id, uint timestamp) {
 		return lockMap.iterateGet(index);
 	}
 
 	function getID (address user) public view returns(uint id) {
+		return lockMap.getID(user);
+	}
+
+	function get (address user) public view returns(uint id, uint timestamp) {
 		return lockMap.get(user);
 	}
+	
 	
 	function validIndex (uint index) public view returns(bool res) {
 		return lockMap.iterateValid(index);

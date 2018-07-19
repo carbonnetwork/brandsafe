@@ -28,7 +28,7 @@ contract.skip("Datastore",function(accounts){
 		catch(err => { console.log("error: " + err); });
 	});
 
-	it("it should add index", function(){
+	it("it should add status index", function(){
 		var ds;
 
 		Datastore.new().
@@ -53,9 +53,23 @@ contract.skip("Datastore",function(accounts){
 		then(function(){ return ds.getIndexByStatus.call(2); }).
 		then(res => {
 			console.log("res 2:" + res);
-		}).catch(err => { 
-			console.log("error: " + err); 
-		});
+		}).catch(err => { console.log("error: " + err); });
+	});
+
+	it("it should add url index", function(){
+		var url = "https://github.com/trufflesuite/truffle/issues/1050";
+		var ds;
+
+		Datastore.new().
+		then(_ds => { ds = _ds;}).
+		then(function(){ return ds.addUrlIndex(accounts[1], url, 1); }).
+		then(p => logObject(p, 0)).
+		then(function(){ return ds.getIndexByUrl.call(accounts[1], url); }).
+		then(res => {
+			console.log("url index res:" + res.valueOf());
+			assert.equal(res.valueOf(), 1, "value not equal");
+		}).
+		catch(err => { console.log("error: " + error); });
 	});
 
 	function repeatTab(level) {

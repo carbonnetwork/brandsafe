@@ -8,7 +8,7 @@ import "./Datastore.sol";
  */
 contract DemandController is Ownable{
 	Datastore ds;
-
+	
 	constructor(address datastore) public {
 		ds = Datastore(datastore);
 	}
@@ -21,4 +21,7 @@ contract DemandController is Ownable{
 		return true;
 	}
 
+	function query (bytes _url) public view returns(bytes cates) {
+		return ds.getCates(msg.sender, _url);
+	}
 }

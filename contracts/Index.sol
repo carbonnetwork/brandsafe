@@ -11,9 +11,43 @@ import "./Manager.sol";
 
  	mapping (uint8 => uint[]) statusIndex;
 
+ 	mapping (address => mapping (bytes => uint)) urlIndex;
+	
+
+	/*
+	//用于按日期组织内容，以方便清理旧的数据，留作扩展
+	mapping (bytes => uint[]) dateIndex;
+
+	//用于按发送url的地址建立索引，方便其查询自己的数据，留作扩展
+	mapping (address => uint[]) senderIndex;
+	
+	//用于按分析url的地址建立索引，方便期查询记录，留作扩展
+	mapping (address => uint[]) analysorIndex;
+	*/
+
  	constructor() public{
 
  	}
+
+ 	function addUrlIndex (address _sender, bytes _url, uint _id) public onlyLicensee returns(bool res) {
+ 		require (_sender != address(0));
+ 		require (_url.length > 0 && _id > 0);
+ 		
+ 		mapping (bytes => uint) idx = urlIndex[_sender];
+ 		idx[_url] = _id;
+
+ 		return true;
+ 	}
+ 	
+
+ 	function getIndexByUrl (address _sender, bytes _url) public view returns(uint _id) {
+ 		require (_sender != address(0));
+ 		require (_url.length > 0);
+
+ 		mapping (bytes => uint) idx = urlIndex[_sender];
+ 		return idx[_url];
+ 	}
+ 	
 
  	function addStatusIndex (uint8 _status, uint _id) public onlyLicensee returns(bool res) {
 		require (_status < 3);

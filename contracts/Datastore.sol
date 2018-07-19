@@ -30,17 +30,6 @@ contract Datastore is Finance,Index {
 	
 	mapping (uint => URL) urls;
 
-	/*
-	//用于按日期组织内容，以方便清理旧的数据，留作扩展
-	mapping (bytes => uint[]) dateIndex;
-
-	//用于按发送url的地址建立索引，方便其查询自己的数据，留作扩展
-	mapping (address => uint[]) senderIndex;
-	
-	//用于按分析url的地址建立索引，方便期查询记录，留作扩展
-	mapping (address => uint[]) analysorIndex;
-	*/
-	
 	constructor() public {
 		
 	}
@@ -63,6 +52,7 @@ contract Datastore is Finance,Index {
 		urls[++id] = url;
 
 		addStatusIndex(0, id);
+		addUrlIndex(_sender, _url, id);
 
 		return true;
 	}
@@ -149,5 +139,16 @@ contract Datastore is Finance,Index {
 		
 		return ("", address(0), 0, 0);
 	}
-							
+
+	function getCates (address _sender, bytes _url) public view returns(bytes _cates) {
+		require (_url.length > 0);
+		require (_sender != address(0));
+
+		uint _id = getIndexByUrl(_sender, _url);
+		if(urls[_id].exist != 0){
+			URL storage u = urls[_id];
+			return u.cates;
+		}
+		return "";
+	}						
 }

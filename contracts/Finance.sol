@@ -29,7 +29,7 @@ contract Finance is Manager {
 	}
 
 	function balanceOf(address analysor) public view returns(uint256 payment) {
-		require (analysor != address(0));		
+		//require (analysor != address(0));		
 
 		return balances[analysor];
 	}

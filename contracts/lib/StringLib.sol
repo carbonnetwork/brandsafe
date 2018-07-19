@@ -6,7 +6,7 @@ pragma solidity ^0.4.23;
 library StringLib {
   
 	function bytesEquals (bytes a, bytes b) public pure returns(bool res) {
-		if( a.length == b.length){
+		if( a.length != b.length){
 			return false;
 		}
 

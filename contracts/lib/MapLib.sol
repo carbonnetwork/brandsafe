@@ -43,7 +43,13 @@ library MapLib {
 		return true;
 	}
 
-	function get (LockMap storage self, address _key) internal view returns(uint id) {
+	function get (LockMap storage self, address _key) internal view returns(uint id, uint timestamp) {
+		LockTime storage lt = self.data[_key].value;
+		return (lt.id, lt.timestamp);
+	}
+	
+
+	function getID (LockMap storage self, address _key) internal view returns(uint id) {
 		if (contains(self, _key)){
 			return self.data[_key].value.id;
 		}
