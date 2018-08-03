@@ -1,15 +1,56 @@
 const Web3 = require('web3');
-var Datastore = artifacts.require("./Datastore.sol");
+var Datastore = artifacts.require("Datastore");
+var CarbonToken = artifacts.require("CarbonToken");
 var web3 = new Web3();
 
 var url = "http://solidity-cn.readthedocs.io/zh/develop/metadata.html";
 
-contract.skip("Datastore",function(accounts){
+var carbonAddress = '0x47f097a5b158bbabe5c91ee0e44c8645d4d5eaaf';
 
+contract.skip("Datastore",function(accounts){
+	it("it should recharge and withdraw", function(){
+		var ds;
+		var carbon;
+
+		CarbonToken.at(carbonAddress).
+		then(cb => {
+			carbon = cb;
+		});
+	
+		Datastore.new(carbonAddress).
+		then(function(_ds){
+			ds = _ds;
+			ds.setCaller(accounts[1]);
+		}).
+		then(function(){ return ds.balanceOf.call(ds.address, {from : accounts[1]}); } ).
+		then(res => { console.log(" contract balance 0 is: " + res.valueOf()); }).
+
+		then(function(){ return carbon.balanceOf.call(accounts[1]); } ).
+		then(res => { console.log(" accounts[1] balance 0 is: " + res.valueOf()); }).
+		then(function() {
+			ds.recharge(10 * 10**15, {from : accounts[1]});
+		}).
+		//then(p => { logObject(p, 0); }).
+		then(function(){ return ds.balanceOf.call(ds.address, {from : accounts[1]}); } ).
+		then(res => { console.log(" contract balance 1 is: " + res.valueOf()); }).
+
+		then(function(){ return carbon.balanceOf.call(accounts[1]); } ).
+		then(res => { console.log(" accounts[1] balance 1 is: " + res.valueOf()); }).
+		then(function(){ return ds.withdraw(accounts[1], 5 * 10**15); }).
+		//then(p => { logObject(p, 0); }).
+		then(function(){ return ds.balanceOf.call(ds.address, {from : accounts[1]}); } ).
+		then(res => { console.log(" contract balance 2 is: " + res.valueOf()); }).
+
+		then(function(){ return carbon.balanceOf.call(accounts[1]); } ).
+		then(res => { console.log(" accounts[1] balance 2 is: " + res.valueOf()); }).
+		catch(err => { console.log("error: " + err); });
+	});
+
+	
 	it("it should add a url in contract",function(){
 		var ds;
 
-		Datastore.new().
+		Datastore.new(carbonAddress).
 		then( _ds => { ds = _ds; }).
 		then(function(){
 			return ds.insertURL(url,1000,accounts[1]);
@@ -31,7 +72,7 @@ contract.skip("Datastore",function(accounts){
 	it("it should add status index", function(){
 		var ds;
 
-		Datastore.new().
+		Datastore.new(carbonAddress).
 		then(_ds => { ds = _ds;}).
 		then(function(){ return ds.addStatusIndex(0,1); }).
 		then(p => logObject(p, 0)).
@@ -57,10 +98,9 @@ contract.skip("Datastore",function(accounts){
 	});
 
 	it("it should add url index", function(){
-		var url = "https://github.com/trufflesuite/truffle/issues/1050";
 		var ds;
 
-		Datastore.new().
+		Datastore.new(carbonAddress).
 		then(_ds => { ds = _ds;}).
 		then(function(){ return ds.addUrlIndex(accounts[1], url, 1); }).
 		then(p => logObject(p, 0)).
@@ -70,7 +110,7 @@ contract.skip("Datastore",function(accounts){
 			assert.equal(res.valueOf(), 1, "value not equal");
 		}).
 		catch(err => { console.log("error: " + error); });
-	});
+	}); 
 
 	function repeatTab(level) {
 		var res = "";

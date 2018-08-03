@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Index </title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<h1> Call permission settings </h1>
+
+	<label>Contract "Datastore": </label><br>
+	call address: <input type="text" name="address" id="dsCallAddress">
+	<input type="button" value="Add" onclick="App.setCallPermission('Datastore');" >
+
+	<label>Contract "Lockstore": </label>
+	call address: <input type="text" name="address" id="lsCallAddress">
+	<input type="button" value="Add" onclick="App.setCallPermission('Lockstore');" >
+
+</body>
+<script type="text/javascript" src="./app.js"></script>
+</html>

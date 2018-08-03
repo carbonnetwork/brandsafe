@@ -1,15 +1,16 @@
 pragma solidity ^0.4.23;
 
+import "./Datastore.sol";
+
 import "carbon-ico/contracts/Ownable.sol";
 
-import "./Datastore.sol";
 /**
  * The DemandController contract does this and that...
  */
-contract DemandController is Ownable{
+contract DemandController {
 	Datastore ds;
 	
-	constructor(address datastore) public {
+	constructor(address datastore) public{
 		ds = Datastore(datastore);
 	}
 

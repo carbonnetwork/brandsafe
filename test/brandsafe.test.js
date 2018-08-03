@@ -7,6 +7,10 @@ var AnalysisController = artifacts.require("./AnalysisController.sol");
 const Web3 = require("web3");
 var web3 = new Web3();
 
+var carbonAddress = '0x94e1529a98c18e65a235f3a442aad9176788f5c1';
+
+var url = 'https://mbd.baidu.com/newspage/data/landingsuper?context=%7B%22nid%22%3A%22news_12818995968293311098%22%7D&n_type=0&p_from=1';
+
 contract("BrandSafe", function(accounts){
 	it("it should add a url in contract", function(){
 		var ls;
@@ -20,22 +24,33 @@ contract("BrandSafe", function(accounts){
 			ls = lockstore;
 		});
 
-		Datastore.new().
+		Datastore.new(carbonAddress).
 		then(datastore => {
 			ds = datastore;
 		}).
 		then(function(){ return DemandController.new(ds.address); }).
 		then(demand => { 
+			console.log("demand address:" + demand.address);
+
 			dm = demand;
 			ds.setCaller(demand.address);
+
+			ds.setCaller(accounts[1]);//
 			//return ds;
 		}).
 		then(demand => {
-			ds.addAmount(accounts[1], 10**15);
-			return ds;
+			console.log("1th accounts: " + accounts[1]);
+			return ds.recharge(10**15, {from : accounts[1]});
+			//return ds;
 		}).
+		then(p =>{
+			console.log("transaction id:" + p.tx);
+		}).
+		then(function(){ return ds.balanceOf(accounts[1]);}).
+		then(b => { console.log("brand safe balance:" + b.valueOf()); }).
 		then(function(){ return AnalysisController.new(ds.address,ls.address)}).
 		then(analysis => { 
+			console.log("analysis address:" + analysis.address);
 			an = analysis;
 			ds.setCaller(analysis.address);
 			ls.setCaller(analysis.address); 
@@ -43,13 +58,14 @@ contract("BrandSafe", function(accounts){
 		}).
 		then(function(){ return ds.balanceOf.call(accounts[1]); }).
 		then(b => {console.log("account " + accounts[1] + " balance is: " + b.valueOf()); }).
-		then(function(){
-			console.log("is this can execute");
-			return dm.addURL("https://github.com/trufflesuite/truffle/issues/1050",1000,{from: accounts[1]});
+		/*then(function(){
+			return dm.addURL(url,1000,{from: accounts[1]});
 		}).
 		then(function(p){
-			logObject(p,0);
+			console.log("transaction id:" + p.tx);
+			//logObject(p,0);
 		}).
+		*/
 		/*
 		then(function(){ return ds.getId.call(); }).
 		then(id => {
@@ -58,15 +74,16 @@ contract("BrandSafe", function(accounts){
 		}).
 		then(res => { console.log("ds res:" + res.valueOf());}).
 		*/
-		then(function() { return an.getURL.call(); }).
+
+		/*then(function() { return an.getURL.call({from: accounts[2]}); }).
 		then(res => {
 			console.log("res: " + res.valueOf());
 			_res = res;
-			assert.equal(web3.toAscii(res[1]),"https://github.com/trufflesuite/truffle/issues/1050","url not equal");
+			assert.equal(web3.toAscii(res[1]),url,"url not equal");
 			return an.lockUrl(res[0],{from: accounts[2]});
 		}).
 		then(res => { logObject(res, 0); }).
-
+		*/
 		/*
 		then(function() { return an.getURL.call(); }).
 		then(res => {
@@ -75,13 +92,14 @@ contract("BrandSafe", function(accounts){
 		}).
 		then(res => { logObject(res, 0); }).
 		*/
+		/*
 		then(function(){ return an.fillCates(_res[0], web3.toAscii(_res[1]), "game,science,edu,economic,affairs", {from: accounts[2]}); }).
-		then(p => logObject(p, 0)).
+		then(p => { logObject(p, 0); }).
 		then(function(){ return dm.query.call(web3.toAscii(_res[1]), {from: accounts[1]}); }).
 		//then(p => logObject(p, 0)).
 		then(res => {
 			console.log("query res: " + web3.toAscii(res));
-		}).
+		}).*/
 		catch(err => { console.log("execute error:" + err); });
 	});
 

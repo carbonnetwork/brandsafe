@@ -10,7 +10,7 @@ contract Manager is Ownable {
 	mapping (address => uint8) callers;
 
 	modifier onlyLicensee() { 
-		require (callers[msg.sender] == 1 || msg.sender == owner); 
+		require (callers[msg.sender] == 1 || msg.sender == owner , "No Permission call the contract."); 
 		_; 
 	}
 	

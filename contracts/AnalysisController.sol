@@ -1,6 +1,7 @@
 pragma solidity ^0.4.23;
 
 
+
 import "carbon-ico/contracts/Ownable.sol";
 
 import "./Datastore.sol";
@@ -12,7 +13,7 @@ import "./lib/StringLib.sol";
 /**
  * The AnalysisController contract does this and that...
  */
-contract AnalysisController is Ownable {
+contract AnalysisController {
 
 	using StringLib for bytes;
 
@@ -21,7 +22,7 @@ contract AnalysisController is Ownable {
 
 	uint constant fiveMin = 5 * 60;
 
-	constructor(address datastore, address lockstroe) public {
+	constructor(address datastore, address lockstroe) public{
 		ds = Datastore(datastore);
 		ls = Lockstore(lockstroe);
 	}
@@ -31,7 +32,7 @@ contract AnalysisController is Ownable {
 	 */
 	function getURL() public view returns(uint _id, bytes _url) {
 		if (ls.contains(msg.sender)){
-			return (0, "");
+			return (0, "current analysor in lock!");
 		}
 
 		uint index = ls.start();
@@ -63,7 +64,6 @@ contract AnalysisController is Ownable {
 	 * 根据状态获取url和其对应的额id，目前只获取当前状态的第一条
 	 */
 	function getURLByStatus(uint8 _status) public view returns(uint _id, bytes _url) {
-
 		uint[] memory ns = ds.getIndexByStatus(_status);
 
 		bytes memory url;
@@ -79,7 +79,7 @@ contract AnalysisController is Ownable {
 			}
 		}
 		
-		return (0, "");
+		return (0, "No url for current analysor");
 	}
 	
 	
@@ -91,7 +91,7 @@ contract AnalysisController is Ownable {
 
 		// The current analysor has job in progress
 		if (ls.contains(msg.sender)){
-			revert();
+			revert("You have job not submitted.");
 		}		
 		
 		uint8 s;
@@ -102,7 +102,7 @@ contract AnalysisController is Ownable {
 
 		// The sender's balance not enough
 		if (ds.balanceOf(sender) < price){
-			revert();
+			revert("The url sender has not enough tokens.");
 		}
 
 		checkStatus(_id, s);
@@ -118,7 +118,7 @@ contract AnalysisController is Ownable {
 	function checkStatus (uint _id, uint8 s) internal {
 		// processed completed
 		if (s > 1 ){
-			revert();
+			revert("The job has been processed.");
 		} else if (s == 1) {
 			address a = ds.getAnalysor(_id);
 
@@ -131,7 +131,7 @@ contract AnalysisController is Ownable {
 					ls.deleteIt(a);
 				} else {
 					// being processed by another analysor
-					revert();
+					revert("The job is being processed by another analysor.");
 				}			
 			}		
 		} else if(s == 0){
@@ -148,7 +148,7 @@ contract AnalysisController is Ownable {
 	 	require (_id > 0 && _cates.length > 0);
 	 	
 	 	if(ls.getID(msg.sender) != _id){
-	 		revert();
+	 		revert("The job is not processing.");
 	 	}
 
 	 	bytes memory url;
@@ -163,12 +163,9 @@ contract AnalysisController is Ownable {
 	 			ds.changeStatus(2,_id);
 	 		}
 	 		
-	 		asyncSend(sender, msg.sender, price);
+	 		ds.asyncSend(sender, msg.sender, price);
+	 	}else{
+	 		revert("The url is not correct.");
 	 	}
-	}
-
-	function asyncSend(address _from, address _to, uint256 _amount) internal {		
-		ds.subAmount(_from, _amount);
-	    ds.addAmount(_to, _amount);
 	}
 }

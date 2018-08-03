@@ -7,12 +7,10 @@ import "./Index.sol";
 import "./Finance.sol";
 
 
-
-
 /**
  * The Datastore contract does this and that...
  */
-contract Datastore is Finance,Index {
+contract Datastore is Index, Finance {
 
 	struct URL {
 		address sender;
@@ -30,7 +28,7 @@ contract Datastore is Finance,Index {
 	
 	mapping (uint => URL) urls;
 
-	constructor() public {
+	constructor(address tokenAddress) public Finance(tokenAddress) {
 		
 	}
 	
