@@ -4,15 +4,46 @@
   <title> Index </title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body>
-	<h1>Finance -- Recharge & Withdraw </h1>
+<body style="margin-top: 10px;">
+	<h1>Finance</h1><br>
+	<h2>Transfer</h2><br>
+	Carbon Account Balance:<br>
+	<div id="tokenBalance">
 
-	Brand Safe Account Balance(Not Carbon Account Balance) : <label id="balance"> 0 </label>
+	</div>
+	<br>
+	From Account: <input type="text" name="from" id="from"><br>
+	To Account: <input type="text" name="to" id="to"><br>
+	Amount: <input type="text" name="amount" id="tokenAmount"><br>
+	<input type="button" value="Transfer" onclick="App.transfer()"><br>
+	<br>
 
-	Recharge (To Brand Safe account): <input type="text" name="amount" id="amount">
-	<input type="button" value="Recharge" onclick="App.recharge()" >
+	<h2>BrandSafe Recharge & Withdraw </h2><br>
+	<br>
 
-	Withdraw (From Brand Safe Account) : <input type="button" value="Withdraw" onclick="App.withdraw()" >
+	Brand Safe Account Balance:<br>
+	<div id="balance">
+		
+	</div>
+	<br>
+	Recharge (To Brand Safe account):<br>
+
+	Account: <input type="text" name="recharge" id="recharge"><br>
+	Amount: <input type="text" name="amount" id="amount"><br>
+	<input type="button" value="Recharge" onclick="App.recharge()" ><br>
+	<br>
+	
+	Withdraw (From Brand Safe Account): <br>
+
+	Account: <input type="text" name="withdraw" id="withdraw"><br>
+	<input type="button" value="Withdraw" onclick="App.withdraw()" ><br>
 </body>
 <script type="text/javascript" src="./app.js"></script>
+<script type="text/javascript">
+	window.onload = function () {
+		App.refreshBalance();
+		App.refreshTokenBalance();
+	}
+
+</script>
 </html>

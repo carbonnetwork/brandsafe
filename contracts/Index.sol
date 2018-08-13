@@ -101,9 +101,7 @@ import "./Manager.sol";
 	 */
 	function removeIndex(uint[] storage _collection, uint _id) internal returns(bool _res) {
 		uint index = indexOf(_collection, _id);
-		if(index != 0 ){
-			_collection[index] = 0;
-		}
+		_collection[index] = 0;
 		return true;
 	}
 }

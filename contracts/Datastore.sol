@@ -34,7 +34,6 @@ contract Datastore is Index, Finance {
 	
 	function insertURL (bytes _url,uint256 _price, address _sender) public onlyLicensee returns(bool res) {
 		require (_url.length > 0 && _price > 0);
-
 		URL memory url = URL({
 			sender : _sender,
 			url : _url,
@@ -46,7 +45,6 @@ contract Datastore is Index, Finance {
 			gas : 0,
 			exist : 1
 		});
-
 		urls[++id] = url;
 
 		addStatusIndex(0, id);
@@ -106,9 +104,9 @@ contract Datastore is Index, Finance {
 			return false;
 		}
 
-		URL storage u = urls[id];
+		URL storage u = urls[_id];
 		uint[] storage ids = statusIndex[u.status];
-		//removeIndex(ids, _id);
+		removeIndex(ids, _id);
 
 		u.status = _status;
 		ids = statusIndex[_status];
@@ -148,5 +146,5 @@ contract Datastore is Index, Finance {
 			return u.cates;
 		}
 		return "";
-	}						
+	}									
 }

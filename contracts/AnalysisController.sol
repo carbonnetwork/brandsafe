@@ -28,7 +28,7 @@ contract AnalysisController {
 	}
 
 	/*
-	 * 获取url中的一个，首先从超时未处理的部分获取;
+	 * 
 	 */
 	function getURL() public view returns(uint _id, bytes _url) {
 		if (ls.contains(msg.sender)){
@@ -61,7 +61,7 @@ contract AnalysisController {
 	
 
 	/*
-	 * 根据状态获取url和其对应的额id，目前只获取当前状态的第一条
+	 * 
 	 */
 	function getURLByStatus(uint8 _status) public view returns(uint _id, bytes _url) {
 		uint[] memory ns = ds.getIndexByStatus(_status);
@@ -84,7 +84,7 @@ contract AnalysisController {
 	
 	
 	/*
-	 * 将url的状态从未分析，更新为正在分析的状态，更新成功的话，此用户才分析的结果才会有奖励
+	 * lock url, when you lock it success,you can process it
 	 */
 	function lockUrl(uint _id) public{		
 		require (_id > 0);
@@ -142,11 +142,11 @@ contract AnalysisController {
 
 
 	/*
-	 * 记录url的类别
+	 * record url categroies
 	 */	
 	function fillCates (uint _id, bytes _url, bytes _cates) public {
 	 	require (_id > 0 && _cates.length > 0);
-	 	
+
 	 	if(ls.getID(msg.sender) != _id){
 	 		revert("The job is not processing.");
 	 	}
@@ -164,6 +164,7 @@ contract AnalysisController {
 	 		}
 	 		
 	 		ds.asyncSend(sender, msg.sender, price);
+	 		ls.deleteIt(msg.sender);
 	 	}else{
 	 		revert("The url is not correct.");
 	 	}

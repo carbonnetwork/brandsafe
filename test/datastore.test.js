@@ -5,7 +5,7 @@ var web3 = new Web3();
 
 var url = "http://solidity-cn.readthedocs.io/zh/develop/metadata.html";
 
-var carbonAddress = '0x47f097a5b158bbabe5c91ee0e44c8645d4d5eaaf';
+var carbonAddress = '0xcd8d3b6c1c9190513a81c88538804def313ed21e';
 
 contract.skip("Datastore",function(accounts){
 	it("it should recharge and withdraw", function(){

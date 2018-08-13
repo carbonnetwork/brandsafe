@@ -1,4 +1,4 @@
-var Lockstore = artifacts.require("./Lockstore.sol");
+var Lockstore = artifacts.require("Lockstore");
 
 contract.skip("Lockstore", function(accounts){
 

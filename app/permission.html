@@ -4,17 +4,35 @@
   <title> Index </title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body>
+<body style="margin-top: 10px;">
 	<h1> Call permission settings </h1>
 
-	<label>Contract "Datastore": </label><br>
-	call address: <input type="text" name="address" id="dsCallAddress">
-	<input type="button" value="Add" onclick="App.setCallPermission('Datastore');" >
+	<h2> Contract Datastore: </h2>
+	<table>
+		<tr>
+			<td style="width: 200px;text-align: right;">call address: </td>
+			<td><input type="text" name="address" id="dsCallAddress"></td>
+		</tr>
+		<tr>
+			<td><input style="width: 120px;" type="button" value="Add" onclick="App.setCallPermission('Datastore');" ></td><td>&nbsp;</td>
+		</tr>
+	</table>
+	
+	<br>
+	<br>
 
-	<label>Contract "Lockstore": </label>
-	call address: <input type="text" name="address" id="lsCallAddress">
-	<input type="button" value="Add" onclick="App.setCallPermission('Lockstore');" >
+	<h2>Contract Lockstore: </h2>
 
+	<table>
+		<tr>
+			<td style="width: 200px;text-align: right;">call address: </td>
+			<td><input type="text" name="address" id="lsCallAddress"></td>
+		</tr>
+		<tr>
+			<td><input style="width: 120px;" type="button" value="Add" onclick="App.setCallPermission('Lockstore');" ></td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
 </body>
 <script type="text/javascript" src="./app.js"></script>
 </html>

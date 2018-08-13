@@ -15,11 +15,11 @@ contract FinanceController is Ownable {
 		ds = Datastore(datastore);
 	}
 
-	function recharge (uint256 _amount) public onlyOwner {
+	function recharge (uint256 _amount) public {
 		ds.recharge(_amount);
 	}	
 
-	function withdrawPayments() public onlyOwner {
+	function withdrawPayments() public {
 		uint256 payment = ds.balanceOf(msg.sender);
 		ds.withdraw(msg.sender,payment);
 	}

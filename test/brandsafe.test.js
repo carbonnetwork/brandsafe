@@ -1,17 +1,17 @@
-var Datastore = artifacts.require("./Datastore.sol");
-var Lockstore = artifacts.require("./Lockstore.sol");
+var Datastore = artifacts.require("Datastore");
+var Lockstore = artifacts.require("Lockstore");
 
-var DemandController = artifacts.require("./DemandController.sol");
-var AnalysisController = artifacts.require("./AnalysisController.sol");
+var DemandController = artifacts.require("DemandController");
+var AnalysisController = artifacts.require("AnalysisController");
 
 const Web3 = require("web3");
 var web3 = new Web3();
 
-var carbonAddress = '0x94e1529a98c18e65a235f3a442aad9176788f5c1';
+var carbonAddress = '0xcd8d3b6c1c9190513a81c88538804def313ed21e';
 
 var url = 'https://mbd.baidu.com/newspage/data/landingsuper?context=%7B%22nid%22%3A%22news_12818995968293311098%22%7D&n_type=0&p_from=1';
 
-contract("BrandSafe", function(accounts){
+contract.skip("BrandSafe", function(accounts){
 	it("it should add a url in contract", function(){
 		var ls;
 		var ds;
@@ -27,6 +27,7 @@ contract("BrandSafe", function(accounts){
 		Datastore.new(carbonAddress).
 		then(datastore => {
 			ds = datastore;
+			console.log("datastore address: " + ds.address);
 		}).
 		then(function(){ return DemandController.new(ds.address); }).
 		then(demand => { 
@@ -92,8 +93,8 @@ contract("BrandSafe", function(accounts){
 		}).
 		then(res => { logObject(res, 0); }).
 		*/
-		/*
-		then(function(){ return an.fillCates(_res[0], web3.toAscii(_res[1]), "game,science,edu,economic,affairs", {from: accounts[2]}); }).
+		
+		/*then(function(){ return an.fillCates(_res[0], web3.toAscii(_res[1]), "game,science,edu,economic,affairs", {from: accounts[2]}); }).
 		then(p => { logObject(p, 0); }).
 		then(function(){ return dm.query.call(web3.toAscii(_res[1]), {from: accounts[1]}); }).
 		//then(p => logObject(p, 0)).

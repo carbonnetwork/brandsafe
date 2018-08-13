@@ -21,8 +21,6 @@ contract Finance is Manager {
 		token = CarbonToken(tokenAddress);
 	}
 
-	//event withdraw(address analysor, uint256 _amount);
-
 	function addAmount(address sender, uint256 _amount) internal returns(bool res) {
 			
 		balances[sender] = balances[sender].add(_amount);
@@ -55,8 +53,7 @@ contract Finance is Manager {
 	function withdraw (address analysor, uint256 _amount) public onlyLicensee returns(bool res) {
 		require (analysor != address(0) && _amount > 0);
 
-		address u = address(this);
-		subAmount(u, _amount);
+		subAmount(analysor, _amount);
 		token.transfer(analysor, _amount);
 		return true;
 	}
